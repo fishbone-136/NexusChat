@@ -47,6 +47,7 @@ sudo apt install mysql-server redis-server nginx cmake g++ libmysqlclient-dev li
 
 # 启动 MySQL 和 Redis
 sudo systemctl start mysql redis-server
+```
 
 ### 2. 数据库
 
@@ -57,6 +58,7 @@ Friend 表（好友关系表）
 AllGroup 表（群组表）
 GroupUser 表（群组成员表）
 OfflineMessage 表（离线消息表）
+```
 
 ### 3. 编译
 
@@ -64,12 +66,14 @@ OfflineMessage 表（离线消息表）
 build
 cmake ..
 make -j$(nproc)
+```
 
 ### 4. 配置api
 
 ```bash
 # 配置大模型api至环境
 export DEEPSEEK_API_KEY=sk-你的key
+```
 
 ### 5. 启动服务
 
@@ -79,8 +83,5 @@ export DEEPSEEK_API_KEY=sk-你的key
 
 # 客户端
 ./bin/ChatClient 127.0.0.1 6000
-# 启动服务器
-./bin/ChatServer 127.0.0.1 6000
+```
 
-# 客户端测试
-./bin/ChatClient 127.0.0.1 6000
