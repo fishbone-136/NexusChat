@@ -8,16 +8,17 @@
 
 - **高性能网络层**：基于 muduo Reactor 多线程模型，单机支持高并发连接
 - **真正集群架构**：Nginx TCP 负载均衡 + Redis Pub/Sub 实现跨服务器消息实时同步
-- **AI 智能增强**：集成 DeepSeek 大模型，支持 `@AI` 智能助手
+- **AI 智能增强**：集成LLM，支持 `@AI` 智能助手
 - **完整 IM 功能**：注册登录、添加好友、创建群组、一对一/群聊、离线消息
 - **智能特性**：
+  - AI智能助手  
   - 内容审核（Moderation）
   - 群消息智能摘要（Summary）
 
 ---
 
 ## 功能演示
-
+- **一对一/群聊**：私聊或加入群组群聊
 - **AI 智能助手**：在私聊或群聊中输入 `@AI 你的问题` 即可触发
 - **群消息摘要**：群聊中输入 `/summary` 可生成当前群聊摘要
 - **集群支持**：多台 ChatServer 通过 Redis 实现消息互通
@@ -46,3 +47,40 @@ sudo apt install mysql-server redis-server nginx cmake g++ libmysqlclient-dev li
 
 # 启动 MySQL 和 Redis
 sudo systemctl start mysql redis-server
+
+### 2. 数据库
+
+```bash
+# 创建数据库并执行项目中的 chat.sql
+User 表（用户表）
+Friend 表（好友关系表）
+AllGroup 表（群组表）
+GroupUser 表（群组成员表）
+OfflineMessage 表（离线消息表）
+
+### 3. 编译
+
+```bash
+build
+cmake ..
+make -j$(nproc)
+
+### 4. 配置api
+
+```bash
+# 配置大模型api至环境
+export DEEPSEEK_API_KEY=sk-你的key
+
+### 5. 启动服务
+
+```bash
+# 启动服务
+./bin/ChatServer 127.0.0.1 6000
+
+# 客户端
+./bin/ChatClient 127.0.0.1 6000
+# 启动服务器
+./bin/ChatServer 127.0.0.1 6000
+
+# 客户端测试
+./bin/ChatClient 127.0.0.1 6000
